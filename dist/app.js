@@ -140,8 +140,9 @@ function renderRoute() {
   state.route = route;
   if (route === 'welcome') { navigate('profile', true); return; }
   if (tabs.includes(route)) {
-    if (!document.querySelector('.main-shell')) { state.tab = tabs.indexOf(route); renderMain(); }
-    closeDetail(); setTab(tabs.indexOf(route)); return;
+    const initialRender = !document.querySelector('.main-shell');
+    if (initialRender) { state.tab = tabs.indexOf(route); renderMain(); }
+    closeDetail(); setTab(tabs.indexOf(route), !initialRender); return;
   }
   if (!document.querySelector('.main-shell')) renderMain();
   if (route === 'appointment') renderAppointment();
